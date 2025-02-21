@@ -28,7 +28,8 @@ const routes = createBrowserRouter([
         loader:({params})=>fetch(`http://localhost:3000/singleTask/${params.id}`)
       }, {
         path: "/detailsTask/:id",
-        element:<PrivateRoute><TaskDetails></TaskDetails></PrivateRoute>
+        element: <PrivateRoute><TaskDetails></TaskDetails></PrivateRoute>,
+        loader:({params})=>fetch(`http://localhost:3000/singleTask/${params.id}`)
       }
       , {
         path: "/login",
