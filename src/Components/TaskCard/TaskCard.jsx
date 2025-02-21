@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { Link } from 'react-router-dom';
 
 const TaskCard = ({ task }) => {
+
+  // https://task-master-server-black.vercel.app/
+  
+  
+  //  const handleDelete =async (id) => {
+  //   const { data } = await axios.delete(`https://task-master-server-black.vercel.app/singleTask/${id}`)
+  //   console.log(data);
+  // }
+
+  // useEffect(() => {
+  //   fetch(``)
+  // },[])
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task._id,
   });
@@ -13,6 +25,7 @@ const TaskCard = ({ task }) => {
     }
     : undefined;
 
+ 
   return (
     <div className=''>
       <div
@@ -30,7 +43,7 @@ const TaskCard = ({ task }) => {
           <Link to={`/updateTask/${task._id}`}><button className='btn'>Edit</button></Link>
 
           <Link to={`/detailsTask/${task._id}`}><button className='btn'>Details</button></Link>
-          <Link><button>delete</button></Link>
+        <button onClick={()=>handleDelete(task._id)} className='btn'>delete</button>
         </div>
       </div>
 

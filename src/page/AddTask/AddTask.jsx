@@ -16,7 +16,7 @@ const AddTask = () => {
       
     }
     console.log(taskValue);
-    const { data } = await axios.post('http://localhost:3000/task',taskValue);
+    const { data } = await axios.post('https://task-master-server-black.vercel.app/task',taskValue);
     // console.log(data);
   }
   return (

@@ -2,7 +2,7 @@ import { DndContext } from "@dnd-kit/core";
 import Column from "../../Components/Column";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
-const socket = io("http://localhost:3000");
+const socket = io("https://task-master-server-black.vercel.app");
 
 const COLUMNS = [
   { id: 'TODO', title: 'To Do' },
@@ -40,7 +40,7 @@ const Home = () => {
 
   // const [tasks, setTasks] = useState([]);
   // useEffect(() => {
-  //   fetch('http://localhost:3000/allTask')
+  //   fetch('https://task-master-server-black.vercel.app/allTask')
   //     .then(res => res.json())
   //   .then(data=>setTasks(data))
 
@@ -97,7 +97,7 @@ const Home = () => {
    const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/allTask")
+    fetch("https://task-master-server-black.vercel.app/allTask")
       .then((res) => res.json())
       .then((data) => setTasks(data));
 

@@ -15,7 +15,7 @@ const UpdateTask = () => {
       title,
       description
     }
-    const {data}=await axios.put(`http://localhost:3000/taskUpdate/${singleUpdateData._id}`,updatedValue)
+    const {data}=await axios.put(`https://task-master-server-black.vercel.app/taskUpdate/${singleUpdateData._id}`,updatedValue)
     // console.log(data);
     if (data.modifiedCount > 0) {
       alert("Update successful")

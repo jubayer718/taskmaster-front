@@ -25,11 +25,11 @@ const routes = createBrowserRouter([
       , {
         path: "/updateTask/:id",
         element: <PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:3000/singleTask/${params.id}`)
+        loader:({params})=>fetch(`https://task-master-server-black.vercel.app/singleTask/${params.id}`)
       }, {
         path: "/detailsTask/:id",
         element: <PrivateRoute><TaskDetails></TaskDetails></PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:3000/singleTask/${params.id}`)
+        loader:({params})=>fetch(`https://task-master-server-black.vercel.app/singleTask/${params.id}`)
       }
       , {
         path: "/login",
