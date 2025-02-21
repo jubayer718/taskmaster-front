@@ -5,6 +5,8 @@ import Signin from "../page/Signin/Signin";
 import Register from "../page/Register/Register";
 import AddTask from "../page/AddTask/AddTask";
 import PrivateRoute from "../Components/Private/PrivateRoute";
+import UpdateTask from "../page/TaskUpdate/UpdateTask";
+import TaskDetails from "../page/Details/TaskDetails";
 // import TaskBoard from "../page/taskboard/TaskBoard";
 
 const routes = createBrowserRouter([
@@ -19,6 +21,14 @@ const routes = createBrowserRouter([
       }, {
         path: "/add-task",
         element:<PrivateRoute><AddTask></AddTask></PrivateRoute>
+      }
+      , {
+        path: "/updateTask/:id",
+        element: <PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>,
+        loader:({params})=>fetch(`http://localhost:3000/singleTask/${params.id}`)
+      }, {
+        path: "/detailsTask/:id",
+        element:<PrivateRoute><TaskDetails></TaskDetails></PrivateRoute>
       }
       , {
         path: "/login",

@@ -1,15 +1,13 @@
 
-
-// import { useNavigate } from 'react-router-dom';
-// import useAxiosPublic from '../axiosPublic/UseAxiosPublic';
 import { FaGoogle } from 'react-icons/fa';
 import { UseAuth } from '../../Hooks/useAuth';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Social = () => {
   const { loginWithGoogle,user } = UseAuth();
-  // const navigate = useNavigate();
-  // const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  
   const handleGoogleSignIn = () => {
     loginWithGoogle()
       .then(async (result) => {
@@ -17,19 +15,19 @@ const Social = () => {
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
-           userId:user?.uid,
           joinedDate: new Date()
         }
-        
+        // store user data to the server
         const { data } = await axios.post("http://localhost:3000/users", userInfo);
         console.log(data);
-        // }
+        if (data.insertedId) {
+          alert('Signin successful')
+        }
+        // navigate to home
+        navigate('/')
+
+
         
-      // axiosPublic.post('/users', userInfo)
-      //   .then(result => {
-      //     // console.log(result.data);
-      //   navigate('/')
-      // })
     })
   }
   return (

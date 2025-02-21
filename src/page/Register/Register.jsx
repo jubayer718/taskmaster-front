@@ -1,10 +1,12 @@
 import axios from "axios";
 import { UseAuth } from "../../Hooks/useAuth";
 import Social from "../../Shared/Social/Social";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Register = () => {
-  const { handleCreateNewUser,user } = UseAuth()
+  const { handleCreateNewUser, user } = UseAuth();
+  const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
@@ -29,8 +31,10 @@ const Register = () => {
       .then(async(result) => {
         // console.log(result);
         const { data } = await axios.post("http://localhost:3000/users", updatedValue);
-        console.log(data);
-        
+        if (data.insertedId) {
+          alert("Registration successful")
+        }
+        navigate("/")
 
     })
 
@@ -56,6 +60,7 @@ const Register = () => {
           
           <button type="submit" className="btn btn-neutral mt-4">Register</button>
             </form>
+            <p>You have already an account <span className="text-orange-400 font-bold"><Link to="/login">login</Link></span></p>
             <Social></Social>
       </div>
     </div>
