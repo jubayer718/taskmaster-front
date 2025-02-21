@@ -12,10 +12,10 @@ const AddTask = () => {
     const taskValue = {
       title,
       description,
-      
+      status: "TODO"
       
     }
-    // console.log(taskValue);
+    console.log(taskValue);
     const { data } = await axios.post('http://localhost:3000/task',taskValue);
     // console.log(data);
   }
