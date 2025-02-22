@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 const TaskCard = ({ task }) => {
 
-  // https://task-master-server-black.vercel.app/
+  // http://localhost:3000/
   
-  
-  //  const handleDelete =async (id) => {
-  //   const { data } = await axios.delete(`https://task-master-server-black.vercel.app/singleTask/${id}`)
-  //   console.log(data);
-  // }
+
+   const handleDelete =async (id) => {
+    const { data } = await axios.delete(`http://localhost:3000/singleTask/${id}`)
+    console.log(data);
+  }
 
   // useEffect(() => {
   //   fetch(``)

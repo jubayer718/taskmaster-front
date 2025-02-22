@@ -18,11 +18,10 @@ const Social = () => {
           joinedDate: new Date()
         }
         // store user data to the server
-        const { data } = await axios.post("https://task-master-server-black.vercel.app/users", userInfo);
-        // console.log(data);
-        if (data.insertedId) {
+        const { data } = await axios.post("http://localhost:3000/users", userInfo);
+        // console.log(data)
           alert('Signin successful')
-        }
+      
         // navigate to home
         navigate('/')
 

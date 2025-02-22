@@ -1,8 +1,18 @@
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import Column from "../../Components/Column";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
-const socket = io("https://task-master-server-black.vercel.app");
+// const socket = io("http://localhost:3000", {
+//   transports: ["websocket"],
+//   withCredentials: true
+// });
+const socket = io("http://localhost:3000", {
+  transports: ["websocket", "polling"],
+  // withCredentials: true,
+  extraHeaders: {
+    "Access-Control-Allow-Origin": "*"
+  }
+});
 
 const COLUMNS = [
   { id: 'TODO', title: 'To Do' },
@@ -38,66 +48,12 @@ const COLUMNS = [
 
 const Home = () => {
 
-  // const [tasks, setTasks] = useState([]);
-  // useEffect(() => {
-  //   fetch('https://task-master-server-black.vercel.app/allTask')
-  //     .then(res => res.json())
-  //   .then(data=>setTasks(data))
-
-
-  // }, [])
   
-  // // get realtime update from database
-  //   socket.on("task_added", (newTask) => {
-  //     setTasks((prevTasks) => [...prevTasks, newTask]);
-  //   });
-  
-  
-  //   socket.on("task_updated", (updatedTask) => {
-  //     setTasks((prevTasks) =>
-  //       prevTasks.map((task) =>
-  //         task._id === updatedTask._id ? { ...task, ...updatedTask } : task
-  //       )
-  //     );
-  //   });
-  
-  //  socket.on("task_deleted", (taskId) => {
-  //     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
-  //   });
-
-  //  return () => {
-  //     socket.off("task_added");
-  //     socket.off("task_updated");
-  //     socket.off("task_deleted");
-  //   };
-  // }, [];
-
-  // function handleDragEnd(event) {
-  //   const { active, over } = event;
-  // // console.log(event);
-  //   if (!over) return;
-
-  //   const taskId = active._id ;
-  //   const newStatus = over._id ;
-
-  //   setTasks(() =>
-  //     tasks.map((task) =>
-  //       task._id === taskId
-  //         ? {
-  //             ...task,
-  //             status: newStatus,
-  //           }
-  //         : task,
-  //     ),
-  //   );
-  // }
-
-
 
    const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("https://task-master-server-black.vercel.app/allTask")
+    fetch("http://localhost:3000/allTask")
       .then((res) => res.json())
       .then((data) => setTasks(data));
 
@@ -143,10 +99,18 @@ const Home = () => {
     socket.emit("update_task", { taskId, status: newStatus });
   }
 
+const sensors = useSensors(
+  useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 10, 
+    },
+  })
+);
+
   return (
       <div className="p-4 mt-16">
-      <div className="flex gap-8">
-        <DndContext onDragEnd={handleDragEnd}>
+      <div className="flex flex-col lg:flex-row gap-8">
+        <DndContext sensors={sensors}  onDragEnd={handleDragEnd}>
           {COLUMNS.map((column) => {
             return (
               <Column

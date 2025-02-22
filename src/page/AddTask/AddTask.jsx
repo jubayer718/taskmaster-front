@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddTask = () => {
 
-
+const navigate=useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,8 +17,13 @@ const AddTask = () => {
       
     }
     console.log(taskValue);
-    const { data } = await axios.post('https://task-master-server-black.vercel.app/task',taskValue);
+    const { data } = await axios.post('http://localhost:3000/task',taskValue);
     // console.log(data);
+    if (data.insertedId) {
+      alert("Task added successful")
+      navigate("/")
+
+    }
   }
   return (
    <div className="hero  min-h-screen mt-16 ">

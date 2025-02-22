@@ -30,7 +30,7 @@ const Register = () => {
     handleCreateNewUser(email, password)
       .then(async(result) => {
         // console.log(result);
-        const { data } = await axios.post("https://task-master-server-black.vercel.app/users", updatedValue);
+        const { data } = await axios.post("http://localhost:3000/users", updatedValue);
         if (data.insertedId) {
           alert("Registration successful")
         }
